@@ -2,15 +2,7 @@ properties([githubProjectProperty(displayName: '', projectUrlStr: 'https://githu
 pipeline {
     
     agent any
-    triggers {
-        githubPush(
-            branches: [
-                // Trigger on pull requests from test to develop or test to release
-                [pattern: 'test:develop'],
-                [pattern: 'test:release']
-            ]
-        )
-    }
+    
     stages {
         stage("Build") {
             steps {
