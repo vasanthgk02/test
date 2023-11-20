@@ -1,7 +1,7 @@
 properties([
     githubProjectProperty(displayName: '', projectUrlStr: 'https://github.com/vasanthgk02/test.git/'), 
     pipelineTriggers([
-        // githubPush()
+        githubPush()
     ])
 ])
 
