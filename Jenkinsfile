@@ -4,22 +4,21 @@ properties([
         // githubPush()
     ])
 ])
+
 pipeline {
     
-    agent any
-
-    
-   stages {
+    agent any   
+    stages {
     stage('Pull Request Build') {
         when {
                 expression {
                     return env.CHANGE_TARGET ==~ /(develop|release)/ && env.CHANGE_BRANCH == 'test'
                 }
-            }
-      steps {
-        checkout scm
-        sh 'echo Hi'
-      }
+        }   
+        steps {
+            sh 'echo Hi'
+            print env
+        }
     }
   }
 }
