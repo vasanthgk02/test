@@ -11,6 +11,7 @@ pipeline {
     stages {
     stage('Pull Request Build') { 
         steps {
+            print env
             script {
                     def sourceBranch = env.CHANGE_BRANCH
                     def targetBranch = env.CHANGE_TARGET
