@@ -1,4 +1,15 @@
-properties([githubProjectProperty(displayName: '', projectUrlStr: 'https://github.com/vasanthgk02/test.git/'), pipelineTriggers([githubPush()])])
+properties([
+    githubProjectProperty(displayName: '', projectUrlStr: 'https://github.com/vasanthgk02/test.git/'), 
+    pipelineTriggers([
+        githubPullRequests(
+            branches: [
+                [pattern: 'develop:test'],
+                [pattern: 'release:test']
+            ]
+        ),
+        githubPush()
+    ])
+])
 pipeline {
     
     agent any
