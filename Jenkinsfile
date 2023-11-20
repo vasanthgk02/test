@@ -1,24 +1,23 @@
 properties([
     githubProjectProperty(displayName: '', projectUrlStr: 'https://github.com/vasanthgk02/test.git/'), 
     pipelineTriggers([
-        githubPullRequests(
-            branches: [
-                [pattern: 'develop:test'],
-                [pattern: 'release:test']
-            ]
-        ),
         githubPush()
     ])
 ])
 pipeline {
     
     agent any
+
     
-    stages {
-        stage("Build") {
-            steps {
-                sh "echo hi"
-            }
-        }
+   stages {
+    stage('Pull Request Build') {
+      when {
+        expression { branchName == 'test' && (pullRequest != null && pullRequest.originBranch == 'test' && pullRequest.targetBranch == 'develop') || (pullRequest != null && pullRequest.originBranch == 'test' && pullRequest.targetBranch == 'release') }
+      }
+      steps {
+        checkout scm
+        sh 'echo Hi'
+      }
     }
+  }
 }
